@@ -1,5 +1,5 @@
 import { type User } from "@prisma/client";
-import { prismaInstance } from "..";
+import { prismaInstance } from "../..";
 
 export default class UserController {
   static async get(id: string): Promise<User | null> {

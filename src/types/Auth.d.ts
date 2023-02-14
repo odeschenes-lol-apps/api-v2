@@ -3,6 +3,7 @@ import { type Request } from "express";
 
 export type AuthRequestData = {
   userId: User["id"];
+  token: string;
 };
 
 export type AuthToken = {

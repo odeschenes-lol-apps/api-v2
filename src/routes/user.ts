@@ -1,17 +1,16 @@
 import { Router } from "express";
-import { prismaInstance } from "..";
+import { prismaInstance } from "../..";
 
 const router = Router();
 
-router.get("/:id", async(req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
-  const user = await prismaInstance.user
-    .findUnique({
-      where: {
-        id: id,
-      },
-    })
+  const user = await prismaInstance.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
 
   res.send(user);
 });
@@ -23,4 +22,3 @@ router.post("/:id", (req, res) => {
 });
 
 export default router;
-

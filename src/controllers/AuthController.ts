@@ -1,4 +1,5 @@
-import { prismaInstance } from "..";
+import { type AuthRequest } from "./../types/Auth.d";
+import { prismaInstance } from "../..";
 import { type Request, type Response } from "express";
 import UserModel from "../models/UserModel";
 
@@ -16,17 +17,17 @@ export default class AuthController {
     }
   }
 
-  static async logout(req: Request, res: Response) {
-    const { id } = req.params;
+  static async logout(req: AuthRequest, res: Response) {
+    const token = await prismaInstance.token.delete({
+      where: {
+        id: req.token,
+      },
+    });
 
-    const user = await UserModel.get(id);
-
-    if (!user) {
-      res.status(404).send("User not found");
+    if (!token) {
+      return res.send("Logout failed. No token found").status(404);
     }
 
-    const token = await prismaInstance.token.delete({
-      where: {},
-    });
+    res.sendStatus(200);
   }
 }

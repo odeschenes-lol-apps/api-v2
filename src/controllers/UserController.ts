@@ -1,4 +1,4 @@
-import { prismaInstance } from "..";
+import { prismaInstance } from "../..";
 import { type Request, type Response } from "express";
 import UserModel from "../models/UserModel";
 import { User } from "@prisma/client";
