@@ -1,8 +1,8 @@
-import { User } from "@prisma/client";
+import { type User } from "@prisma/client";
 import { prismaInstance } from "..";
 
 export default class UserController {
-  static async get(id: string) {
+  static async get(id: string): Promise<User | null> {
     const user = await prismaInstance.user.findUnique({
       where: {
         id: id,
@@ -12,7 +12,7 @@ export default class UserController {
     return user;
   }
 
-  static async create(data: Omit<User, "id">) {
+  static async create(data: Omit<User, "id">): Promise<User> {
     const user = await prismaInstance.user.create({
       data: {
         ...data,

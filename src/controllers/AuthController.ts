@@ -19,6 +19,14 @@ export default class AuthController {
   static async logout(req: Request, res: Response) {
     const { id } = req.params;
 
-    // how to get token from header
+    const user = await UserModel.get(id);
+
+    if (!user) {
+      res.status(404).send("User not found");
+    }
+
+    const token = await prismaInstance.token.delete({
+      where: {},
+    });
   }
 }
