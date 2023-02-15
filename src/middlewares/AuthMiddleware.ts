@@ -1,5 +1,5 @@
 import { AuthRequestData, AuthToken } from "../types/Auth";
-import { SECRET } from "../../index";
+import { SECRET } from "../index";
 import jwt from "jsonwebtoken";
 import { type Request, type Response, type NextFunction } from "express";
 

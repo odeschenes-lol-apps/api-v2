@@ -1,11 +1,15 @@
+import { UserWithTokens } from "./../types/User.d";
 import { type User } from "@prisma/client";
 import { prismaInstance } from "../..";
 
-export default class UserController {
-  static async get(id: string): Promise<User | null> {
+export default class UserModel {
+  static async get(id: string, options = { includeToken: false }) {
     const user = await prismaInstance.user.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        Token: options.includeToken,
       },
     });
 

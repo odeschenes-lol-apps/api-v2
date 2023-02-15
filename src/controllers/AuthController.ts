@@ -8,9 +8,15 @@ export default class AuthController {
     const { id } = req.params;
 
     try {
-      const user = await UserModel.get(id);
+      const user = await UserModel.get(id, { includeToken: true });
 
-      res.send(user);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+
+      if (user.Token.length) {
+        return res.send(user.Token[0]);
+      }
     } catch (e) {
       console.error(e);
       res.status(404).send("User not found");

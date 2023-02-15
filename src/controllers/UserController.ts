@@ -4,7 +4,7 @@ import UserModel from "../models/UserModel";
 import { User } from "@prisma/client";
 
 export default class UserController {
-  static async getUser(req: Request, res: Response) {
+  static async get(req: Request, res: Response) {
     const { id } = req.params;
 
     try {
@@ -17,7 +17,7 @@ export default class UserController {
     }
   }
 
-  static async createUser(req: Request, res: Response) {
+  static async create(req: Request, res: Response) {
     const { email } = req.params as Omit<User, "id">;
 
     try {
